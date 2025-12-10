@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-primary: #050505;
+  --bg-secondary: #0a0a0a;
+  --cyber-cyan: #00f3ff;
+  --cyber-pink: #ff0055;
+  --cyber-yellow: #fcee0a;
+  --text-primary: #e0e0e0;
+  --text-dim: #707070;
+  --border-width: 2px;
+  --corner-size: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    linear-gradient(rgba(0, 20, 30, 0.9), rgba(0, 10, 10, 0.95)),
+    repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 243, 255, 0.03) 2px, rgba(0, 243, 255, 0.03) 3px);
+  background-size: cover;
+}
+
+/* CRT Scanline Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+h1 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 3rem;
+  color: var(--cyber-yellow);
+  text-shadow: 2px 2px 0px var(--cyber-pink);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Cyberpunk Card */
+.card {
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  position: relative;
+  padding: 1.5rem;
+  clip-path: polygon(0 0,
+      100% 0,
+      100% calc(100% - var(--corner-size)),
+      calc(100% - var(--corner-size)) 100%,
+      0 100%);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+/* Decorative corner lines */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-top: 2px solid var(--cyber-cyan);
+  border-left: 2px solid var(--cyber-cyan);
+}
+
+/* Cyber Button */
+.btn {
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--cyber-cyan);
+  border: 1px solid var(--cyber-cyan);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.btn:hover {
+  background: var(--cyber-cyan);
+  color: #000;
+  box-shadow: 0 0 20px var(--cyber-cyan);
+}
+
+.btn-primary {
+  background: var(--cyber-cyan);
+  color: #000;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background: #fff;
+  box-shadow: 0 0 30px var(--cyber-cyan);
+}
+
+.btn-danger {
+  border-color: var(--cyber-pink);
+  color: var(--cyber-pink);
+}
+
+.btn-danger:hover {
+  background: var(--cyber-pink);
+  color: #fff;
+  box-shadow: 0 0 20px var(--cyber-pink);
+}
+
+/* Inputs */
+.input {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #333;
+  border-left: 3px solid var(--cyber-cyan);
+  color: var(--cyber-cyan);
+  font-family: 'Share Tech Mono', monospace;
+  padding: 1rem;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  background: rgba(0, 243, 255, 0.05);
+  box-shadow: inset 0 0 15px rgba(0, 243, 255, 0.1);
+}
+
+/* Glitch Effect Class */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 blue;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% {
+    clip: rect(30px, 9999px, 10px, 0);
+  }
+
+  20% {
+    clip: rect(70px, 9999px, 90px, 0);
+  }
+
+  40% {
+    clip: rect(50px, 9999px, 20px, 0);
+  }
+
+  60% {
+    clip: rect(20px, 9999px, 60px, 0);
+  }
+
+  80% {
+    clip: rect(90px, 9999px, 10px, 0);
+  }
+
+  100% {
+    clip: rect(10px, 9999px, 40px, 0);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    clip: rect(90px, 9999px, 30px, 0);
+  }
+
+  20% {
+    clip: rect(10px, 9999px, 70px, 0);
+  }
+
+  40% {
+    clip: rect(40px, 9999px, 90px, 0);
+  }
+
+  60% {
+    clip: rect(60px, 9999px, 50px, 0);
+  }
+
+  80% {
+    clip: rect(20px, 9999px, 10px, 0);
+  }
+
+  100% {
+    clip: rect(70px, 9999px, 20px, 0);
+  }
+}
+
+/* Tag */
+.tag {
+  color: #000;
+  background: var(--cyber-yellow);
+  padding: 2px 8px;
+  font-family: 'Share Tech Mono';
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
